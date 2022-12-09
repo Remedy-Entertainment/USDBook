@@ -1,0 +1,65 @@
+name: Build and Deploy
+    
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  
+  build:
+    runs-on: ubuntu-latest
+        
+    steps:
+      - name: Install latest stable
+        uses: actions-rs/toolchain@v1
+      
+      - name: Install dependencies 
+        uses: actions-rs/cargo@v1
+        with:
+          command: install
+          args: mdbook mdbook-catppuccin mdbook-admonish
+          
+      - uses: actions/checkout@v3
+
+      - name: Build the book
+        run: mdbook build book
+        
+      - name: Upload built book artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: book
+          path: book
+          if-no-files-found: error
+  
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.event_name != 'pull_request'
+    
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    
+    steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: book
+          path: .
+      - name: Upload Pages
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: .
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
