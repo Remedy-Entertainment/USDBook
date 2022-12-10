@@ -4,7 +4,7 @@ This book aims to offer a more human-readable and artist friendly way of learnin
 
 ![Preview with Latte styling of the book](./preview.png)
 
-## Install rust language and mdbook + mdbook-admonish
+## Install Rust language and dependencies
 
 - Follow the instructions on https://www.rust-lang.org/learn/get-started to install rust for your system
 - Run `rustup update` to update rust to the latest version
