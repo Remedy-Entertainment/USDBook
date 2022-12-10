@@ -22,5 +22,5 @@ Most images in this book are using the [Animal Logic ALab](https://animallogic.c
 ----
 
 ```admonish tip title="Contributing"
-This is an open project and any contributions are welcome and appreciated! See [Contributing](./contributing.md) for more information
+This is an open project and any contributions are welcome and appreciated! See the [GitHub Repository](https://github.com/Remedy-Entertainment/USDBook) for more information
 ```
