@@ -1,4 +1,4 @@
-# Universal Scene Description (USD) for Beginners
+# Book of USD
 
 This book aims to offer a more human-readable and artist friendly way of learning Universal Scene Description (USD) and its jargon. It is not a replacement of the [official USD Glossary](https://graphics.pixar.com/usd/release/glossary.html), but more of a starting point for anyone new to the technology.
 
