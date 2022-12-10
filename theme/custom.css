@@ -1,0 +1,48 @@
+:root {
+    --content-max-width: 1200px;
+}
+
+table {
+    width:100%;
+}
+
+.part-title {
+    font-size: 120%;
+}
+
+
+img[src*='#center'] { 
+    display: block;
+    margin: auto;
+}
+
+.chapter li {
+    color: inherit;
+}
+
+/*
+.chapter > li.chapter-item > div
+{
+    font-weight: bold;
+}
+*/
+.chapter > .chapter-item:first-child {
+    font-weight: bold;
+    font-size: 200%;
+}
+
+.sidebar-scrollbox {
+    scrollbar-width: thin;
+}
+
+ol.chapter li ol.section li.chapter-item.expanded a.active {
+    font-size: 1em;
+    font-weight: 400;
+    display: inline-block;
+    border-left: .25rem solid transparent;
+    border-left-color: var(--inline-code-color);
+    padding: .35rem 1rem .35rem 1.25rem;
+    line-height: 1.4;
+    width: 100%;
+    box-sizing: border-box;
+}

@@ -35,7 +35,7 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Build the book
-        run: mdbook build book
+        run: mdbook build -d book
         
       - name: Upload built book artifact
         uses: actions/upload-artifact@v3

@@ -1,0 +1,26 @@
+[book]
+title = "Getting Started with Universal Scene Description (USD)"
+authors = ["Remedy Entertainment Plc"]
+language = "en"
+multilingual = false
+src = "src"
+
+[output.html]
+default-theme = "Latte"
+curly-quotes = true
+git-repository-url = "https://github.com/Remedy-Entertainment/USDBook"
+edit-url-template = "https://github.com/Remedy-Entertainment/USDBook/-/edit/main/{path}"
+git-repository-icon = "fa-github"
+additional-css = ["theme/custom.css", 'theme/mdbook-admonish.css', '.\theme\catppuccin.css', '.\theme\catppuccin-highlight.css']
+no-section-label = true
+
+[output.html.fold]
+enable = true
+level = 4
+
+[preprocessor.admonish]
+command = "mdbook-admonish"
+assets_version = "2.0.0" # do not edit: managed by `mdbook-admonish install`
+
+[preprocessor.catppuccin]
+assets_version = "0.1.1" # DO NOT EDIT: Managed by `mdbook-catppuccin install`
