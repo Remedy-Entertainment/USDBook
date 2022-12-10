@@ -2,7 +2,7 @@
 
 Before making a contribution to this repository (and we hope you do), please read over this document first.
 
-Any changes or new work should be done on the `develop` branch of this repository. When creating Pull Requests, please ensure that the base branch is set to "develop". The repository owners will take care of promoting any changes to master at their volition.
+Any changes or new work should be done on the `develop` branch of this repository. When creating Pull Requests, please ensure that the base branch is set to "develop". The repository owners will take care of promoting any changes to `main`.
 
 ## Conventions and Style
 
