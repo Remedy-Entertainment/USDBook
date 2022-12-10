@@ -6,10 +6,6 @@
 
 This book aims to be a companion document for the [official documentation](https://graphics.pixar.com/usd/release/index.html)
 
-```admonish success title="Version"
-You are reading version **{{#include VERSION}}**
-```
-
 ```admonish note title="Authors"
 * [Remedy Entertainment Plc](https://www.remedygames.com) 
 ```
