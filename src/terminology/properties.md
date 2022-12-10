@@ -24,5 +24,5 @@ Namespaces can be used to categorize or group properties together.
 ---
 
 ```admonish note title=""
-↪ [USD Glossary - Property](https://graphics.pixar.com/usd/release/glossary)
+↪ [USD Glossary - Property](https://graphics.pixar.com/usd/release/glossary.html#usdglossary-property)
 ```
