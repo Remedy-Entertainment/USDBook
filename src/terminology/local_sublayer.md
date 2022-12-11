@@ -1,6 +1,6 @@
 # Local/Sublayer
 
-Layers can sublayer other layers, grafting mutiple layer stacks together into one. Sublayering is in fact how Layer Stacks are made!
+Layers can sublayer other layers, grafting multiple layer stacks together into one. Sublayering is in fact how Layer Stacks are made!
 
 ```admonish danger title=""
 This means that _order matters_ when sublayering.  

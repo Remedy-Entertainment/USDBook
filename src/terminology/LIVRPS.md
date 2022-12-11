@@ -1,6 +1,6 @@
 # Strength Ordering (LIVRPS)
 
-Composition and opinion value resolution go hand in hand, and in order to remain sane; there are rules. Each composition arc has a "strength" assigned to it. Meaning that if for example opinions targeting a property are authored on 3 different composition arcs within the same layer stack, the composition arc that is the "strongest" wins. This is where the acrynonym `LIVRPS (Liver Peas)` comes into play.   
+Composition and opinion value resolution go hand in hand, and in order to remain sane; there are rules. Each composition arc has a "strength" assigned to it. Meaning that if for example opinions targeting a property are authored on 3 different composition arcs within the same layer stack, the composition arc that is the "strongest" wins. This is where the acronym `LIVRPS (Liver Peas)` comes into play.   
 
 It stands for
 - `L`ocal

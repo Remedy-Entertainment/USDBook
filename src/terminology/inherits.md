@@ -17,7 +17,7 @@ Due to `_Base` being a class, it does not automatically show up in the hierarchy
 ![](../images/terminology/inherits_base.png)
 ~~~
 
-Inherting from `_Base` results in having its hierarchy grafted underneath each prim that inherits it.
+Inheriting from `_Base` results in having its hierarchy grafted underneath each prim that inherits it.
 
 ```admonish example title="Simple inherits"
 ![](../images/terminology/inherits_1.png)
