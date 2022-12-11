@@ -38,7 +38,6 @@ def Scope "Asset"
         prepend payload=@./highres_model.usd@
     )
     {
-        float3[] extentsHint = [(-50, 0, -30), (50, 200, 30)]
     }
 }
 ```
