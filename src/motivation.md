@@ -2,7 +2,7 @@
 
 Universal Scene Description (USD) is already making big waves in the VFX/Film and Games industries, with large players such as [NVidia](https://www.nvidia.com/en-us/omniverse/), [Apple](https://opensource.apple.com/projects/usd/) and [Autodesk](https://makeanything.autodesk.com/usd) jumping on the technology. But as a newcomer; it can be an incredibly daunting and frustrating journey to venture into.
 
-This book's driving motivation is to offer a _succint, beginner-friendly and structured_ way of introducing USD, its concepts and terminology. At the moment this book focusses predominantly on terminology, but will be expanded upon with workflow examples in the future.
+This book's driving motivation is to offer a _succinct, beginner-friendly and structured_ way of introducing USD, its concepts and terminology. At the moment this book focusses predominantly on terminology, but will be expanded upon with workflow examples in the future.
 
 ```admonish question title="You may be wondering at this point"
  _Why read this book instead the [official USD Glossary](https://graphics.pixar.com/usd/release/glossary.html) and [Tutorials](https://graphics.pixar.com/usd/release/tut_usd_tutorials.html)?_
