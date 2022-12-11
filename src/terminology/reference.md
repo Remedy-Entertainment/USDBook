@@ -1,7 +1,7 @@
 # Reference
 
 ## Layer References
-Beyond sublayers, layers can also be grafted underneath prims. Using the example Cube and Sphere from [Sublayers](./sublayers.md), we can also create prims and have them point to a these layers respectively.
+Beyond sublayers, layers can also be grafted underneath prims. Using the example Cube and Sphere from [Local/Sublayer](./local_sublayer.md), we can also create prims and have them point to a these layers respectively.
 
 ```admonish example title="Layer referencing"
 ![reference_1](../images/terminology/reference_1.png)
