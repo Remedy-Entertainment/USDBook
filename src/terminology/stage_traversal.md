@@ -7,7 +7,8 @@ By default, USD Stage Traversal will only consider prims that are active, define
 ```admonish example title="Toggling Abstract prims in USDView"
 ![](../images/terminology/stage_traversal.gif)
 
-The prim `_root_type` is defined as a `class`, which is considered _abstract_ in USD. When opening the layer it is part of in USDView will not automatically show it. But if you toggle 
+The prim `_root_type` is defined as a `class`, which is considered _abstract_ in USD. When opening the layer it is part of in USDView, it will not be shown in the hierarchy.  
+However, enabling `Abstract Prims (Classes)` in the `Show` menu of the hierarchy view, any abstract prims like `_root_type` will then be displayed in the hierarchy. Internally, this is modifying the Stage Traversal predicate.
 ```
 
 ---
