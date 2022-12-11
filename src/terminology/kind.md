@@ -26,7 +26,7 @@ Using kind can greatly speed up finding the "right" types of prims you may be in
 
 ## How kind can be used
 
-Taking a look at the root layer of [Animal Logic ALab](https://animallogic.com/alab/), we can see that top-level prims can be annotated as `assembly`, this allows for easily identifiying "assets" within the scene. In the example below, both `lab_workbench01_0001` and its parent `alab_set01` are annotated as assemblies.
+Taking a look at the root layer of [Animal Logic ALab](https://animallogic.com/alab/), we can see that top-level prims can be annotated as `assembly`, this allows for easily identifying "assets" within the scene. In the example below, both `lab_workbench01_0001` and its parent `alab_set01` are annotated as assemblies.
 
 ```admonish example title="lab_workbench01_0001"
 ![](../images/terminology/kind_assembly.png)

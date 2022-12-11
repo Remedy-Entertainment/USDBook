@@ -73,7 +73,7 @@ def Xform "World"
 ~~~
 
 ### Difference between `Inherits` and `Specializes`
-When inspecting the resolved opinions in `world.usd`, notice that the overriden values for `inputs:diffuseGain` and `inputs:specularRoughness` on the base `Metal` propagate fully to `InheritedMaterial`, but not to our specialized `CorrodedMaterial`.
+When inspecting the resolved opinions in `world.usd`, notice that the overridden values for `inputs:diffuseGain` and `inputs:specularRoughness` on the base `Metal` propagate fully to `InheritedMaterial`, but not to our specialized `CorrodedMaterial`.
 
 | Base Metal Override         | Result on `InheritedMaterial`     | Result on `CorrodedMaterial` |
 |--------------|-----------|------------|

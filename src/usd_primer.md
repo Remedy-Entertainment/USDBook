@@ -27,7 +27,7 @@ A concrete example would be to support using FBX files directly inside a USD hie
 ```
 
 All in all, USD aims to be a portable interchange format by defining a shared "language" sort to speak to describe scene and 3D data.  
-This idea is not new, but USD takes this a step further by also offering a way to consistenly draw/render/image scenes. This is made possible through `Hydra`, USD's backend rendering technology.
+This idea is not new, but USD takes this a step further by also offering a way to consistently draw/render/image scenes. This is made possible through `Hydra`, USD's backend rendering technology.
 
 ```admonish warning title=""
 This book does not currently cover Hydra concepts, but may do so in the future

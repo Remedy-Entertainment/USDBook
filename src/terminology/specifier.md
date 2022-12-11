@@ -15,7 +15,7 @@ A concrete definition. This is generally used when you want to define a prim for
   }
   ```
 
-  `def` can also be `typeless` and is usually used in context of composition, which will fill in the actual type.
+  `def` can also be `type-less` and is usually used in context of composition, which will fill in the actual type.
   ```
   def "MyPrim" {
     # ...
@@ -24,7 +24,7 @@ A concrete definition. This is generally used when you want to define a prim for
 ~~~
 
 ~~~admonish abstract title="**over**"
-This tells USD that a prim is to be overridden. If the composition engine cannot find the prim targetted by the over specification, the override will be ignored and will not contribute to scene composition.
+This tells USD that a prim is to be overridden. If the composition engine cannot find the prim targeted by the over specification, the override will be ignored and will not contribute to scene composition.
   ```
   over "SomethingThatAlreadyExists"
   {
