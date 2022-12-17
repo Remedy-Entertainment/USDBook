@@ -8,6 +8,7 @@
   - [Motivation](./motivation.md)
   - [What is USD](./usd_primer.md)
   - [What is it not?](./what_is_usd_not.md)
+  - [Getting USD](./getting_usd.md)
 - [USD Terminology](./terminology/terminology.md)
   - [Prims](./terminology/prims.md)
   - [Properties](./terminology/properties.md)

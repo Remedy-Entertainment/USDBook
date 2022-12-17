@@ -2,7 +2,7 @@
 
 # Book of USD
 
-**[Universal Scene Description (USD)](https://graphics.pixar.com/usd/release/index.html)** is a new way of defining and working with 3D-Scene data, developed by [Pixar Animation Studios](https://www.pixar.com/).
+**[Universal Scene Description (USD)](https://graphics.pixar.com/usd/release/index.html)** is a novel way of defining and working with 3D-Scene data, developed by [Pixar Animation Studios](https://www.pixar.com/).
 
 This book aims to be a companion document for the [official documentation](https://graphics.pixar.com/usd/release/index.html)
 
