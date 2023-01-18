@@ -6,13 +6,13 @@
   "scripts": {
     "build": "webpack",
     "build:dev": "npm run build -- --mode development",
-    "build:dev:watch": "npm run build -- --mode development --watch",
+    "build:dev:watch": "npm run build:dev -- --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "usd"
+    "usd", "usdz", "threejs", "viewer"
   ],
-  "author": "",
+  "author": "Philippe Sawicki",
   "license": "MIT",
   "devDependencies": {
     "copy-webpack-plugin": "6.4.1",

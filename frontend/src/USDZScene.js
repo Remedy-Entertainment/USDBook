@@ -8,6 +8,11 @@ import { USDZLoader } from 'three-usdz-loader';
  * THREE Scene loading USDz assets.
  * 
  * @todo Convert this to TypeScript, to facilitate collaboration.
+ * @todo Include additional configuration options within USDz file scene containers (e.g. default file scales, camera
+ * position and orientation, etc.).
+ * @todo Add progress indicators when loading USDz files, in order to provide a better User experience.
+ * @todo Add option to disable auto-rotating the asset in the viewer.
+ * @todo Add option to provide the auto-rotation speed of the asset in the viewer, if auto-rotation is enabled.
  */
 export class USDZScene {
 
@@ -90,7 +95,11 @@ export class USDZScene {
      */
     #getSceneSize() {
         const ASPECT_RATIO = 9.0 / 16.0;
-        const innerWidth = this.#sceneContainer.offsetWidth || 800;
+        const innerWidth = this.#sceneContainer.offsetWidth !== undefined
+            ? this.#sceneContainer.offsetWidth
+            : this.#sceneContainer.clientWidth !== undefined
+            ? this.#sceneContainer.clientWidth
+            : 800;
         const innerHeight = Math.ceil(innerWidth * ASPECT_RATIO);
 
         return [innerWidth, innerHeight];
@@ -103,6 +112,14 @@ export class USDZScene {
      */
     async #buildTHREEScene() {
         const [innerWidth, innerHeight] = this.#getSceneSize();
+        // this.#sceneContainer.innerHeight = innerHeight; 
+        this.#sceneContainer.innerHTML = [
+                `<div class="loader" style="min-width: ${innerWidth}px; min-height: ${innerHeight}px">`,
+                    `<div class="vertical-center">`,
+                        '<i class="fa fa-spinner fa-spin"></i>',
+                    '<div>',
+                '</div>',
+            ].join('');
 
         // Setup scene:
         const sceneBackgroundColor = this.#getSceneBackgroundColor();
@@ -122,8 +139,7 @@ export class USDZScene {
         this.#renderer.toneMappingExposure = 2;
         this.#renderer.shadowMap.enabled = false;
         this.#renderer.shadowMap.type = THREE.VSMShadowMap;
-        this.#sceneContainer.appendChild(this.#renderer.domElement);
-
+        
         this.#controls = new OrbitControls(this.#camera, this.#renderer.domElement);
         this.#controls.update();
 
@@ -149,6 +165,10 @@ export class USDZScene {
         pointLight.shadow.radius = 4;
         pointLight.shadow.samples = 8;
         scene.add(pointLight);
+
+        // Only load the scene in the container once the assets have loaded, so the progress indicators are displayed
+        // until the sceen and its content are fully loaded:
+        this.#sceneContainer.replaceChildren(this.#renderer.domElement);
 
         return scene;
     }
@@ -303,9 +323,14 @@ export class USDZScene {
      * @returns {THREE.ColorRepresentation} The color to use for the THREE Scene's background color.
      */
     #getSceneBackgroundColor() {
+        // Search for the `.js-usd-viewer.dark` and `.js-usd-viewer.light` CSS class names within the stylesheets
+        // definitions present on the page, in order to infer the styles to apply to the USDz THREE `<canvas>`
+        // elements:
         const cssModeClassName = this.#prefersDarkMode() ? 'dark' : 'light';
         const cssClassName = `.js-usd-viewer.${cssModeClassName}`;
 
+        // Attempt to extract the `background-color` property of the styles in the stylesheet definitions present on
+        // the page:
         for (const styleSheet of document.styleSheets) {
             for (const cssRule of styleSheet.cssRules) {
                 if (cssRule.selectorText === cssClassName && 'background-color' in cssRule.style) {
@@ -314,6 +339,7 @@ export class USDZScene {
             }
         }
 
+        // If no CSS classes matching the expected nomenclature were found, default to a known useable color:
         return 0xffffff;
     }
 }

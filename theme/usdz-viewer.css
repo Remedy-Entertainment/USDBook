@@ -22,3 +22,20 @@
 .js-usd-viewer.light {
     background-color: #e6e9ef;
 }
+
+/**
+ * Style definitions for the elements displayed while loading the USDz asset.
+ */
+.js-usd-viewer .loader {
+    position: relative;
+}
+.js-usd-viewer .loader .vertical-center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%);
+}
+.js-usd-viewer .loader .vertical-center i {
+    font-size: 5.0rem;
+}

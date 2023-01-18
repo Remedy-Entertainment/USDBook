@@ -10,9 +10,14 @@ let usdzScenes = [];
 
 
 /**
+ * @callback onDOMReadyCallback
+ * @return {void}
+ */
+
+/**
  * Executed the given callback once the DOM is ready.
  * 
- * @param {Function} callback Callback to execute once the DOM is ready.
+ * @param {onDOMReadyCallback} callback Callback to execute once the DOM is ready.
  */
 function onDOMReady(callback) {
     if (document.readyState !== 'loading') {
@@ -23,20 +28,21 @@ function onDOMReady(callback) {
 }
 
 /**
- * Load  all the USDZ scenes on the page.
+ * Load  all the USDZ scenes on the page, identified by the `.js-usd-viewer` CSS class:
  * 
  * @returns {Promise<USDZScene[]>} A Promise to be fulfilled once all the USDZ scenes on the page have been loaded.
  */
 async function loadSceneContainers() {
     const scenes = [];
 
+    // Search for THREE scene containers on the page, identified by the `.js-usd-viewer` CSS class:
     const sceneContainers = document.querySelectorAll('.js-usd-viewer');
     for (const sceneContainer of sceneContainers) {
         const usdzScene = new USDZScene(sceneContainer);
         scenes.push(usdzScene);
     }
 
-    // Load all scenes:
+    // Load all scene containers found on the page:
     await Promise.all(scenes.map(scene => scene.load()));
     return scenes;
 }
