@@ -112,17 +112,19 @@ export class USDZScene {
      */
     async #buildTHREEScene() {
         const [innerWidth, innerHeight] = this.#getSceneSize();
-        // this.#sceneContainer.innerHeight = innerHeight; 
+        const sceneBackgroundColor = this.#getSceneBackgroundColor();
+
+        // Insert a spinner animation while loading the scene, so the User is not facing a blank or partially-loaded
+        // content until all assets have been downloaded and processed:
         this.#sceneContainer.innerHTML = [
-                `<div class="loader" style="min-width: ${innerWidth}px; min-height: ${innerHeight}px">`,
-                    `<div class="vertical-center">`,
+                `<div class="loader" style="min-width: ${innerWidth}px; min-height: ${innerHeight}px; background-color: ${sceneBackgroundColor}">`,
+                    '<div class="vertical-center">',
                         '<i class="fa fa-spinner fa-spin"></i>',
                     '<div>',
                 '</div>',
             ].join('');
 
         // Setup scene:
-        const sceneBackgroundColor = this.#getSceneBackgroundColor();
         const scene = new THREE.Scene();
         scene.background = new THREE.Color(sceneBackgroundColor);
 
