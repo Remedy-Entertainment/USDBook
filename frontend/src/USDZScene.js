@@ -105,8 +105,9 @@ export class USDZScene {
         const [innerWidth, innerHeight] = this.#getSceneSize();
 
         // Setup scene:
+        const sceneBackgroundColor = this.#getSceneBackgroundColor();
         const scene = new THREE.Scene();
-        scene.background = new THREE.Color(0xffffff);
+        scene.background = new THREE.Color(sceneBackgroundColor);
 
         // Setup light:
         const ambientLight = new THREE.AmbientLight(0x111111, 0.01);
@@ -160,7 +161,7 @@ export class USDZScene {
      * @returns {Promise<USDZInstance>} A Promise to be fulfilled once the USDz file has been loaded.
      */
     async #loadUSDZFile(scene, usdzFile) {
-        const usdzLoader = new USDZLoader('./wasm');
+        const usdzLoader = new USDZLoader(this.#getWASMDependenciesDirectory());
         const usdzBuffer = await fetch(usdzFile);
         const fileBits = [await usdzBuffer.arrayBuffer(),];
         const file = new File(fileBits, usdzFile);
@@ -261,5 +262,58 @@ export class USDZScene {
         camera.position.copy(controls.target).sub(direction);
   
         controls.update();
+    }
+
+    /**
+     * Return the location of the WASM dependencies.
+     * 
+     * @returns {string} The location of the WASM dependencies.
+     */
+    #getWASMDependenciesDirectory() {
+        let directory = '';
+        const hostname = window.location.hostname.toLowerCase();
+        if (hostname === 'localhost') {
+            // On `localhost`, WASM dependencies are served at the root of the URL:
+            directory = '';
+        } else if (hostname.endsWith('.github.io')) {
+            // On GitHub Pages, sites are named using the `<username>.github.io/<repository>/...` format:
+            const repositorySegments = window.location.pathname.split('/');
+            if (repositorySegments.length > 2) {
+                directory = `/${repositorySegments[1]}`;
+            }
+        }
+        return `${directory}/wasm`;
+    }
+
+    /**
+     * Check if the User prefers a dark color scheme.
+     * 
+     * @returns {boolean} `true` if the User prefers a dark color scheme, `false` otherwise.
+     */
+    #prefersDarkMode() {
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark').matches) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Return the color to use for the THREE Scene, based on the User's preference for either a `dark` or `light` mode.
+     * 
+     * @returns {THREE.ColorRepresentation} The color to use for the THREE Scene's background color.
+     */
+    #getSceneBackgroundColor() {
+        const cssModeClassName = this.#prefersDarkMode() ? 'dark' : 'light';
+        const cssClassName = `.js-usd-viewer.${cssModeClassName}`;
+
+        for (const styleSheet of document.styleSheets) {
+            for (const cssRule of styleSheet.cssRules) {
+                if (cssRule.selectorText === cssClassName && 'background-color' in cssRule.style) {
+                    return cssRule.style['background-color'];
+                }
+            }
+        }
+
+        return 0xffffff;
     }
 }
