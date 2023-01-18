@@ -160,7 +160,7 @@ export class USDZScene {
      * @returns {Promise<USDZInstance>} A Promise to be fulfilled once the USDz file has been loaded.
      */
     async #loadUSDZFile(scene, usdzFile) {
-        const usdzLoader = new USDZLoader('/wasm');
+        const usdzLoader = new USDZLoader('./wasm');
         const usdzBuffer = await fetch(usdzFile);
         const fileBits = [await usdzBuffer.arrayBuffer(),];
         const file = new File(fileBits, usdzFile);
