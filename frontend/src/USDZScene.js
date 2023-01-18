@@ -171,7 +171,7 @@ export class USDZScene {
         scene.add(pointLight);
 
         // Only load the scene in the container once the assets have loaded, so the progress indicators are displayed
-        // until the sceen and its content are fully loaded:
+        // until the scene and its content are fully loaded:
         this.#sceneContainer.replaceChildren(this.#renderer.domElement);
 
         return scene;

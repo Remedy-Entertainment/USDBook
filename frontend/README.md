@@ -46,7 +46,7 @@ The project offers the following scripts:
 
 Over time, this project could be improved in the following ways:
 
-- [ ] Moving from JavaScript to TypeScript in order to improve the developement experience for Users not necessarily familiar with JavaScript, ThreeJS or USD.
+- [ ] Moving from JavaScript to TypeScript in order to improve the development experience for Users not necessarily familiar with JavaScript, ThreeJS or USD.
 - [ ] Packaging this front-end code into a separate project, in order not to risk polluting the `mdbook` project by moving files at build-time in order to place them in the locations expected by the HTML renderer.
 - [ ] Adding progress indicators when loading USDz files, in order to provide a better User experience.
 - [ ] Adding option to disable auto-rotating the asset in the viewer.

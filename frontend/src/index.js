@@ -28,9 +28,9 @@ function onDOMReady(callback) {
 }
 
 /**
- * Load  all the USDZ scenes on the page, identified by the `.js-usd-viewer` CSS class:
+ * Load  all the USDz scenes on the page, identified by the `.js-usd-viewer` CSS class:
  *
- * @returns {Promise<USDZScene[]>} A Promise to be fulfilled once all the USDZ scenes on the page have been loaded.
+ * @returns {Promise<USDZScene[]>} A Promise to be fulfilled once all the USDz scenes on the page have been loaded.
  */
 async function loadSceneContainers() {
     const scenes = [];
