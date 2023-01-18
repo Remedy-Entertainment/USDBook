@@ -150,9 +150,11 @@ export class USDZScene {
             ? this.#sceneContainer.getAttribute(this.#ENVIRONMENT_MAP_SRC_DATA_ATTRIBUTE)
             : undefined;
 
-        await this.#loadEnvironmentMap(environmentMapFile);
-
-        this.#loadedModel = await this.#loadUSDZFile(scene, usdzFile);
+        // Load the USDz file and HDR environment map in parallel for efficiency:
+        [this.#loadedModel, ] = await Promise.all([
+            this.#loadUSDZFile(scene, usdzFile),
+            this.#loadEnvironmentMap(environmentMapFile),
+        ]);
 
         this.#camera.position.set(0.0, 0.0, 7.5);
 
