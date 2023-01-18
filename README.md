@@ -6,7 +6,7 @@ This book aims to offer a more human-readable and artist friendly way of learnin
 
 ## Install NodeJS and dependencies
 
-- Follow the instructions on https://nodejs.org to install rust for your system.
+- Follow the instructions on https://nodejs.org to install NodeJS for your system.
 
 ## Install Rust language and dependencies
 
