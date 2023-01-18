@@ -20,6 +20,11 @@ jobs:
     runs-on: ubuntu-latest
         
     steps:
+      - name: Install NodeJS
+        uses: actions/setup-node@v3
+        with:
+            node-version: 13.x
+
       - name: Install latest stable
         uses: actions-rs/toolchain@v1
         with:
@@ -33,6 +38,9 @@ jobs:
           args: mdbook mdbook-catppuccin mdbook-admonish
           
       - uses: actions/checkout@v3
+
+      - name: Build USDz viewer frontend
+        run: cd frontend && npm install && npm run build && cd ..
 
       - name: Build the book
         run: mdbook build -d book

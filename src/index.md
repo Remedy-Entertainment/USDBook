@@ -6,6 +6,14 @@
 
 This book aims to be a companion document for the [official documentation](https://graphics.pixar.com/usd/release/index.html)
 
+## Hit the book!
+
+Learn about specific USD notions by navigating the chapters on your left, or feel free to contribute additional content [online](https://github.com/Remedy-Entertainment/USDBook).
+
+<div class="js-usd-viewer" data-usdz-src="usdz/ASWF_USD_Cookie.usdz"></div>
+
+*USD Cookie* courtesy of the [ASWF USD Working Group](https://wiki.aswf.io/display/WGUSD).
+
 ```admonish note title="Authors"
 * [Remedy Entertainment Plc](https://www.remedygames.com) 
 ```
