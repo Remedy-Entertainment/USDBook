@@ -6,7 +6,7 @@ import { USDZLoader } from 'three-usdz-loader';
 
 /**
  * THREE Scene loading USDz assets.
- * 
+ *
  * @todo Convert this to TypeScript, to facilitate collaboration.
  * @todo Include additional configuration options within USDz file scene containers (e.g. default file scales, camera
  * position and orientation, etc.).
@@ -18,47 +18,47 @@ export class USDZScene {
 
     /**
      * DOM container of the THREE scene.
-     * 
+     *
      * @type {HTMLDivElement}
      */
     #sceneContainer;
 
     /**
      * THREE scene renderer.
-     * 
+     *
      * @type {THREE.WebGLRenderer}
      */
     #renderer;
 
     /**
      * THREE scene.
-     * 
+     *
      * @type {THREE.Scene}
      */
     #scene;
 
     /**
      * THREE scene camera.
-     * 
+     *
      * @type {THREE.PerspectiveCamera}
      */
     #camera;
 
     /**
      * THREE scene controls.
-     * 
+     *
      * @type {OrbitControls}
      */
     #controls;
 
     /**
      * Loaded USDz model.
-     * 
+     *
      @type {USDZInstance}
      */
     #loadedModel;
 
-    
+
     /**
      * Key of the `data-*` attribute holding the path of the USDz file to load.
      */
@@ -69,10 +69,10 @@ export class USDZScene {
      */
     #ENVIRONMENT_MAP_SRC_DATA_ATTRIBUTE = 'data-envmap-src';
 
-    
+
     /**
      * Constructor.
-     * 
+     *
      * @param {HTMLDivElement} sceneContainer DOM container of the THREE scene.
      */
     constructor(sceneContainer) {
@@ -90,7 +90,7 @@ export class USDZScene {
 
     /**
      * Return the size of the THREE Scene.
-     * 
+     *
      * @returns {Array<number>} The width and height of the THREE Scene.
      */
     #getSceneSize() {
@@ -107,7 +107,7 @@ export class USDZScene {
 
     /**
      * Build the THREE Scene.
-     * 
+     *
      * @returns {Promise<THREE.Scene>} A Promise to be fulfilled once the THREE Scene has been built.
      */
     async #buildTHREEScene() {
@@ -141,7 +141,7 @@ export class USDZScene {
         this.#renderer.toneMappingExposure = 2;
         this.#renderer.shadowMap.enabled = false;
         this.#renderer.shadowMap.type = THREE.VSMShadowMap;
-        
+
         this.#controls = new OrbitControls(this.#camera, this.#renderer.domElement);
         this.#controls.update();
 
@@ -149,7 +149,7 @@ export class USDZScene {
         const environmentMapFile = this.#sceneContainer.hasAttribute(this.#ENVIRONMENT_MAP_SRC_DATA_ATTRIBUTE)
             ? this.#sceneContainer.getAttribute(this.#ENVIRONMENT_MAP_SRC_DATA_ATTRIBUTE)
             : undefined;
-        
+
         await this.#loadEnvironmentMap(environmentMapFile);
 
         this.#loadedModel = await this.#loadUSDZFile(scene, usdzFile);
@@ -177,7 +177,7 @@ export class USDZScene {
 
     /**
      * Load the given USDz file into the given THREE Scene.
-     * 
+     *
      * @param {THREE.Scene} scene THREE Scene into which to load the USDz file.
      * @param {string} usdzFile Path of the USDz file to load.
      * @returns {Promise<USDZInstance>} A Promise to be fulfilled once the USDz file has been loaded.
@@ -187,7 +187,7 @@ export class USDZScene {
         const usdzBuffer = await fetch(usdzFile);
         const fileBits = [await usdzBuffer.arrayBuffer(),];
         const file = new File(fileBits, usdzFile);
-        
+
         const group = new THREE.Group();
         group.name = 'USD Root';
         group.position.set(0.0, 0.0, 0.0);
@@ -201,7 +201,7 @@ export class USDZScene {
 
     /**
      * Load the environment map for the scene.
-     * 
+     *
      * @param {string} environmentMapFile Environment map file to load.
      * @returns {Promise<THREE.DataTexture>} A Promise to be fulfilled with the texture of the environment map.
      */
@@ -223,7 +223,7 @@ export class USDZScene {
 
     /**
      * Animate the USDz scene.
-     * 
+     *
      * @param {number} frameTime Duration of the frame.
      */
     animate(frameTime) {
@@ -245,7 +245,7 @@ export class USDZScene {
 
     /**
      * Fit the given selected THREE Objects into the camera framing.
-     * 
+     *
      * @param {THREE.Camera} camera THREE Scene camera.
      * @param {THREE.OrbitControls} controls THREE Scene controls.
      * @param {Array<THREE.Group>} selection THREE Objects to fit into the camera framing.
@@ -255,44 +255,45 @@ export class USDZScene {
         const size = new THREE.Vector3();
         const center = new THREE.Vector3();
         const box = new THREE.Box3();
-        
+
         box.makeEmpty();
         for (const object of selection) {
             box.expandByObject(object);
         }
-  
+
         box.getSize(size);
         box.getCenter(center);
-  
+
         const maxSize = Math.max(size.x, size.y, size.z);
         const fitHeightDistance = maxSize / (2 * Math.atan(Math.PI * camera.fov / 360));
         const fitWidthDistance = fitHeightDistance / camera.aspect;
         const distance = fitOffset * Math.max(fitHeightDistance, fitWidthDistance);
-  
+
         const direction = controls.target.clone()
             .sub(camera.position)
             .normalize()
             .multiplyScalar(distance);
-  
+
         controls.maxDistance = distance * 10;
         controls.target.copy(center);
-  
+
         camera.near = distance / 100;
         camera.far = distance * 100;
         camera.updateProjectionMatrix();
-  
+
         camera.position.copy(controls.target).sub(direction);
-  
+
         controls.update();
     }
 
     /**
      * Return the location of the WASM dependencies.
-     * 
+     *
      * @returns {string} The location of the WASM dependencies.
      */
     #getWASMDependenciesDirectory() {
         let directory = '';
+
         const hostname = window.location.hostname.toLowerCase();
         if (hostname === 'localhost') {
             // On `localhost`, WASM dependencies are served at the root of the URL:
@@ -304,12 +305,13 @@ export class USDZScene {
                 directory = `/${repositorySegments[1]}`;
             }
         }
+
         return `${directory}/wasm`;
     }
 
     /**
      * Check if the User prefers a dark color scheme.
-     * 
+     *
      * @returns {boolean} `true` if the User prefers a dark color scheme, `false` otherwise.
      */
     #prefersDarkMode() {
@@ -321,7 +323,7 @@ export class USDZScene {
 
     /**
      * Return the color to use for the THREE Scene, based on the User's preference for either a `dark` or `light` mode.
-     * 
+     *
      * @returns {THREE.ColorRepresentation} The color to use for the THREE Scene's background color.
      */
     #getSceneBackgroundColor() {

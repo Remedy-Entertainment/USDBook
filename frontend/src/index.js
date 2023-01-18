@@ -3,7 +3,7 @@ import { USDZScene } from './USDZScene';
 
 /**
  * USDz scenes loaded on the page.
- * 
+ *
  * @type {Array<USDZScene>}
  */
 let usdzScenes = [];
@@ -16,7 +16,7 @@ let usdzScenes = [];
 
 /**
  * Executed the given callback once the DOM is ready.
- * 
+ *
  * @param {onDOMReadyCallback} callback Callback to execute once the DOM is ready.
  */
 function onDOMReady(callback) {
@@ -29,7 +29,7 @@ function onDOMReady(callback) {
 
 /**
  * Load  all the USDZ scenes on the page, identified by the `.js-usd-viewer` CSS class:
- * 
+ *
  * @returns {Promise<USDZScene[]>} A Promise to be fulfilled once all the USDZ scenes on the page have been loaded.
  */
 async function loadSceneContainers() {

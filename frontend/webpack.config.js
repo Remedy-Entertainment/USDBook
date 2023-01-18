@@ -14,13 +14,13 @@ module.exports = {
         new CopyPlugin({
             patterns: [
                 // Service Worker to serve the HTTP(S) Headers required for WASM resources:
-                { 
-                    from: './node_modules/coi-serviceworker/coi-serviceworker.min.js', 
+                {
+                    from: './node_modules/coi-serviceworker/coi-serviceworker.min.js',
                     to: '../..',
                 },
                 // Copy WASM resources to a distributable folder:
-                { 
-                    from: './node_modules/three-usdz-loader/external', 
+                {
+                    from: './node_modules/three-usdz-loader/external',
                     to: '../../src/wasm',
                 },
             ],
