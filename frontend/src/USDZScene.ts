@@ -2,12 +2,12 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader';
 import { USDZLoader } from 'three-usdz-loader';
+import { USDZInstance } from 'three-usdz-loader/lib/USDZInstance';
 
 
 /**
  * THREE Scene loading USDz assets.
  *
- * @todo Convert this to TypeScript, to facilitate collaboration.
  * @todo Include additional configuration options within USDz file scene containers (e.g. default file scales, camera
  * position and orientation, etc.).
  * @todo Add progress indicators when loading USDz files, in order to provide a better User experience.
@@ -16,45 +16,33 @@ export class USDZScene {
 
     /**
      * DOM container of the THREE scene.
-     *
-     * @type {HTMLDivElement}
      */
-    #sceneContainer;
+    #sceneContainer: HTMLDivElement;
 
     /**
      * THREE scene renderer.
-     *
-     * @type {THREE.WebGLRenderer}
      */
-    #renderer;
+    #renderer: THREE.WebGLRenderer;
 
     /**
      * THREE scene.
-     *
-     * @type {THREE.Scene}
      */
-    #scene;
+    #scene: THREE.Scene;
 
     /**
      * THREE scene camera.
-     *
-     * @type {THREE.PerspectiveCamera}
      */
-    #camera;
+    #camera: THREE.PerspectiveCamera;
 
     /**
      * THREE scene controls.
-     *
-     * @type {OrbitControls}
      */
-    #controls;
+    #controls: OrbitControls;
 
     /**
      * Loaded USDz model.
-     *
-     @type {USDZInstance}
      */
-    #loadedModel;
+    #loadedModel: USDZInstance;
 
     /**
      * Flag indicating whether the object is expected to auto-rotate during animations.
@@ -96,9 +84,9 @@ export class USDZScene {
     /**
      * Constructor.
      *
-     * @param {HTMLDivElement} sceneContainer DOM container of the THREE scene.
+     * @param sceneContainer DOM container of the THREE scene.
      */
-    constructor(sceneContainer) {
+    constructor(sceneContainer: HTMLDivElement) {
         this.#sceneContainer = sceneContainer;
 
         // Extract settings from the scene container:
@@ -118,7 +106,7 @@ export class USDZScene {
     /**
      * Load the USDz scene.
      *
-     * @returns {Promise<void>} A Promise to be fulfilled once the USDz scene has been built.
+     * @returns A Promise to be fulfilled once the USDz scene has been built.
      */
     async load() {
         this.#scene = await this.#buildTHREEScene();
@@ -128,7 +116,7 @@ export class USDZScene {
     /**
      * Return the size of the THREE Scene.
      *
-     * @returns {Array<number>} The width and height of the THREE Scene.
+     * @returns The width and height of the THREE Scene.
      */
     #getSceneSize() {
         const ASPECT_RATIO = 9.0 / 16.0;
@@ -145,7 +133,7 @@ export class USDZScene {
     /**
      * Build the THREE Scene.
      *
-     * @returns {Promise<THREE.Scene>} A Promise to be fulfilled once the THREE Scene has been built.
+     * @returns A Promise to be fulfilled once the THREE Scene has been built.
      */
     async #buildTHREEScene() {
         const [innerWidth, innerHeight] = this.#getSceneSize();
@@ -153,7 +141,7 @@ export class USDZScene {
 
         // Insert a spinner animation while loading the scene, so the User is not facing a blank or partially-loaded
         // content until all assets have been downloaded and processed:
-        this.#sceneContainer.style.backgroundColor = sceneBackgroundColor;
+        this.#sceneContainer.style.backgroundColor = sceneBackgroundColor.toString();
         this.#sceneContainer.innerHTML = [
                 `<div class="loader" style="min-width: ${innerWidth}px; min-height: ${innerHeight}px; background-color: ${sceneBackgroundColor}">`,
                     '<div class="vertical-center">',
@@ -205,7 +193,7 @@ export class USDZScene {
         pointLight.shadow.mapSize.height = 1024;
         pointLight.shadow.bias = -0.002;
         pointLight.shadow.radius = 4;
-        pointLight.shadow.samples = 8;
+        // pointLight.shadow.samples = 8;
         scene.add(pointLight);
 
         // Only load the scene in the container once the assets have loaded, so the progress indicators are displayed
@@ -231,11 +219,11 @@ export class USDZScene {
     /**
      * Load the given USDz file into the given THREE Scene.
      *
-     * @param {THREE.Scene} scene THREE Scene into which to load the USDz file.
-     * @param {string} usdzFile Path of the USDz file to load.
-     * @returns {Promise<USDZInstance>} A Promise to be fulfilled once the USDz file has been loaded.
+     * @param scene THREE Scene into which to load the USDz file.
+     * @param usdzFile Path of the USDz file to load.
+     * @returns A Promise to be fulfilled once the USDz file has been loaded.
      */
-    async #loadUSDZFile(scene, usdzFile) {
+    async #loadUSDZFile(scene: THREE.Scene, usdzFile: string) {
         const usdzLoader = new USDZLoader(this.#getWASMDependenciesDirectory());
         const usdzBuffer = await fetch(usdzFile);
         const fileBits = [await usdzBuffer.arrayBuffer(),];
@@ -255,15 +243,15 @@ export class USDZScene {
     /**
      * Load the environment map for the scene.
      *
-     * @param {string} environmentMapFile Environment map file to load.
-     * @returns {Promise<THREE.DataTexture>} A Promise to be fulfilled with the texture of the environment map.
+     * @param environmentMapFile Environment map file to load.
+     * @returns A Promise to be fulfilled with the texture of the environment map.
      */
-    #loadEnvironmentMap(environmentMapFile = 'images/studio_country_hall_1k.hdr') {
+    #loadEnvironmentMap(environmentMapFile = 'images/studio_country_hall_1k.hdr'): Promise<THREE.DataTexture> {
         return new Promise(resolve => {
             const pmremGenerator = new THREE.PMREMGenerator(this.#renderer);
             pmremGenerator.compileCubemapShader();
 
-            new RGBELoader().load(environmentMapFile, texture => {
+            new RGBELoader().load(environmentMapFile, (texture: THREE.DataTexture) => {
                 const hdrRenderTarget = pmremGenerator.fromEquirectangular(texture);
                 texture.mapping = THREE.EquirectangularRefractionMapping;
                 texture.needsUpdate = true;
@@ -277,9 +265,9 @@ export class USDZScene {
     /**
      * Animate the USDz scene.
      *
-     * @param {number} timestamp UNIX timestamp (in milliseconds).
+     * @param timestamp UNIX timestamp (in milliseconds).
      */
-    animate(timestamp) {
+    animate(timestamp: number) {
         this.#loadedModel.update(timestamp);
         if (this.#autoRotate && !this.#isDragging) {
             this.#scene.rotation.y += this.#autoRotateSpeed;
@@ -301,12 +289,12 @@ export class USDZScene {
     /**
      * Fit the given selected THREE Objects into the camera framing.
      *
-     * @param {THREE.Camera} camera THREE Scene camera.
-     * @param {THREE.OrbitControls} controls THREE Scene controls.
-     * @param {Array<THREE.Group>} selection THREE Objects to fit into the camera framing.
-     * @param {number} fitOffset Adjustment factor for the fitting.
+     * @param camera THREE Scene camera.
+     * @param controls THREE Scene controls.
+     * @param selection THREE Objects to fit into the camera framing.
+     * @param fitOffset Adjustment factor for the fitting.
      */
-    #fitCameraToSelection(camera, controls, selection, fitOffset = 1.5) {
+    #fitCameraToSelection(camera: THREE.PerspectiveCamera, controls: OrbitControls, selection: THREE.Group[], fitOffset = 1.5) {
         const size = new THREE.Vector3();
         const center = new THREE.Vector3();
         const box = new THREE.Box3();
@@ -344,7 +332,7 @@ export class USDZScene {
     /**
      * Return the location of the WASM dependencies.
      *
-     * @returns {string} The location of the WASM dependencies.
+     * @returns The location of the WASM dependencies.
      */
     #getWASMDependenciesDirectory() {
         let directory = '';
@@ -367,7 +355,7 @@ export class USDZScene {
     /**
      * Check if the User prefers a dark color scheme.
      *
-     * @returns {boolean} `true` if the User prefers a dark color scheme, `false` otherwise.
+     * @returns `true` if the User prefers a dark color scheme, `false` otherwise.
      */
     #prefersDarkMode() {
         if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark').matches) {
@@ -379,9 +367,9 @@ export class USDZScene {
     /**
      * Return the color to use for the THREE Scene, based on the User's preference for either a `dark` or `light` mode.
      *
-     * @returns {THREE.ColorRepresentation} The color to use for the THREE Scene's background color.
+     * @returns The color to use for the THREE Scene's background color.
      */
-    #getSceneBackgroundColor() {
+    #getSceneBackgroundColor(): THREE.ColorRepresentation {
         // Search for the `.js-usd-viewer.dark` and `.js-usd-viewer.light` CSS class names within the stylesheets
         // definitions present on the page, in order to infer the styles to apply to the USDz THREE `<canvas>`
         // elements:
@@ -392,8 +380,10 @@ export class USDZScene {
         // the page:
         for (const styleSheet of document.styleSheets) {
             for (const cssRule of styleSheet.cssRules) {
-                if (cssRule.selectorText === cssClassName && 'background-color' in cssRule.style) {
-                    return cssRule.style['background-color'];
+                if (cssRule instanceof CSSStyleRule
+                        && cssRule.selectorText === cssClassName
+                        && 'background-color' in cssRule.style) {
+                    return cssRule.style['background-color'] as THREE.ColorRepresentation;
                 }
             }
         }
