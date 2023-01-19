@@ -16,6 +16,15 @@ For example:
 <div class="js-usd-viewer" data-usdz-src="usdz/usd-cookie.usdz"></div>
 ```
 
+#### Available `data-*` attribute options
+
+|Option|Required|Default value|Description|
+|---|:---:|:---:|---|
+|`data-usdz-src`|yes|-|Path of the USDz file to display|
+|`data-envmap-src`|no|-|Path of the HDR image to use as environment map for the scene|
+|`data-auto-rotate`|no|`true`|Flag indicating whether the scene should auto-rotate during animations|
+|`data-auto-rotate-speed`|no|`0.01`|Auto-rotation speed of the scene during animations.|
+
 ### Customization
 
 The ThreeJS element rendered in the placeholders on the document can be styled using CSS definitions, which makes it possible to provide different background colors depending on whether Users indicate a preference for dark or light modes.
@@ -49,5 +58,3 @@ Over time, this project could be improved in the following ways:
 - [ ] Moving from JavaScript to TypeScript in order to improve the development experience for Users not necessarily familiar with JavaScript, ThreeJS or USD.
 - [ ] Packaging this front-end code into a separate project, in order not to risk polluting the `mdbook` project by moving files at build-time in order to place them in the locations expected by the HTML renderer.
 - [ ] Adding progress indicators when loading USDz files, in order to provide a better User experience.
-- [ ] Adding option to disable auto-rotating the asset in the viewer.
-- [ ] Adding option to provide the auto-rotation speed of the asset in the viewer, if auto-rotation is enabled.

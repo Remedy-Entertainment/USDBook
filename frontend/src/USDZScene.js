@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader';
 import { USDZLoader } from 'three-usdz-loader';
 
@@ -11,8 +11,6 @@ import { USDZLoader } from 'three-usdz-loader';
  * @todo Include additional configuration options within USDz file scene containers (e.g. default file scales, camera
  * position and orientation, etc.).
  * @todo Add progress indicators when loading USDz files, in order to provide a better User experience.
- * @todo Add option to disable auto-rotating the asset in the viewer.
- * @todo Add option to provide the auto-rotation speed of the asset in the viewer, if auto-rotation is enabled.
  */
 export class USDZScene {
 
@@ -58,6 +56,21 @@ export class USDZScene {
      */
     #loadedModel;
 
+    /**
+     * Flag indicating whether the object is expected to auto-rotate during animations.
+     */
+    #autoRotate = true;
+
+    /**
+     * Speed at which to auto-rotate the scene during animations.
+     */
+    #autoRotateSpeed = 0.01;
+
+    /**
+     * Flag indicating whether the User is currently performing a drag over the scene.
+     */
+    #isDragging = false;
+
 
     /**
      * Key of the `data-*` attribute holding the path of the USDz file to load.
@@ -69,6 +82,16 @@ export class USDZScene {
      */
     #ENVIRONMENT_MAP_SRC_DATA_ATTRIBUTE = 'data-envmap-src';
 
+    /**
+     * Key of the `data-*` attribute holding the flag indicating whether the scene should auto-rotate during animations.
+     */
+    #AUTO_ROTATE_DATA_ATTRIBUTE = 'data-auto-rotate';
+
+    /**
+     * Key of the `data-*` attribute holding the auto-rotation speed of the scene during animations.
+     */
+    #AUTO_ROTATE_SPEED_DATA_ATTRIBUTE = 'data-auto-rotate-speed';
+
 
     /**
      * Constructor.
@@ -77,6 +100,19 @@ export class USDZScene {
      */
     constructor(sceneContainer) {
         this.#sceneContainer = sceneContainer;
+
+        // Extract settings from the scene container:
+        if (this.#sceneContainer.hasAttribute(this.#AUTO_ROTATE_DATA_ATTRIBUTE)) {
+            const autoRotateValue = this.#sceneContainer.getAttribute(this.#AUTO_ROTATE_DATA_ATTRIBUTE).toLowerCase();
+            this.#autoRotate = autoRotateValue === 'true';
+        }
+        if (this.#sceneContainer.hasAttribute(this.#AUTO_ROTATE_SPEED_DATA_ATTRIBUTE)) {
+            const autoRotateSpeedValue = this.#sceneContainer.getAttribute(this.#AUTO_ROTATE_SPEED_DATA_ATTRIBUTE);
+            const parsedAutoRotateSpeed = parseFloat(autoRotateSpeedValue);
+            if (!isNaN(parsedAutoRotateSpeed)) {
+                this.#autoRotateSpeed = parsedAutoRotateSpeed;
+            }
+        }
     }
 
     /**
@@ -86,6 +122,7 @@ export class USDZScene {
      */
     async load() {
         this.#scene = await this.#buildTHREEScene();
+        this.#registerEventListeners();
     }
 
     /**
@@ -116,6 +153,7 @@ export class USDZScene {
 
         // Insert a spinner animation while loading the scene, so the User is not facing a blank or partially-loaded
         // content until all assets have been downloaded and processed:
+        this.#sceneContainer.style.backgroundColor = sceneBackgroundColor;
         this.#sceneContainer.innerHTML = [
                 `<div class="loader" style="min-width: ${innerWidth}px; min-height: ${innerHeight}px; background-color: ${sceneBackgroundColor}">`,
                     '<div class="vertical-center">',
@@ -178,6 +216,19 @@ export class USDZScene {
     }
 
     /**
+     * Register event listeners to be applied on the rendered scene's HTML element.
+     */
+    #registerEventListeners() {
+        this.#renderer.domElement.addEventListener('mousedown', () => {
+            this.#isDragging = true;
+        }, { passive: true, });
+
+        this.#renderer.domElement.addEventListener('mouseup', () => {
+            this.#isDragging = false;
+        }, { passive: true, });
+    }
+
+    /**
      * Load the given USDz file into the given THREE Scene.
      *
      * @param {THREE.Scene} scene THREE Scene into which to load the USDz file.
@@ -226,11 +277,13 @@ export class USDZScene {
     /**
      * Animate the USDz scene.
      *
-     * @param {number} frameTime Duration of the frame.
+     * @param {number} timestamp UNIX timestamp (in milliseconds).
      */
-    animate(frameTime) {
-        this.#loadedModel.update(frameTime);
-        this.#scene.rotation.y += 0.01
+    animate(timestamp) {
+        this.#loadedModel.update(timestamp);
+        if (this.#autoRotate && !this.#isDragging) {
+            this.#scene.rotation.y += this.#autoRotateSpeed;
+        }
         this.#renderer.render(this.#scene, this.#camera);
     }
 

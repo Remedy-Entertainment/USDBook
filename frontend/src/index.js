@@ -52,11 +52,11 @@ async function loadSceneContainers() {
  * Animate the USDZ scenes loaded on the page.
  */
 async function animateScenes() {
-    const frameTime = new Date().getTime() / 1000;
+    const timestamp = new Date().getTime() / 1000;
     await new Promise(resolve => setTimeout(resolve, 10));
 
     for (const usdzScene of usdzScenes) {
-        usdzScene.animate(frameTime);
+        usdzScene.animate(timestamp);
     }
 
     requestAnimationFrame(animateScenes);
