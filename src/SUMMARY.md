@@ -31,6 +31,7 @@
     - [Inherits](./terminology/inherits.md)
     - [Specializes](./terminology/specializes.md)  
   - [Strength Ordering (LIVRPS)](./terminology/LIVRPS.md)
+  - [Default Prim](./terminology/default_prim.md)
   - [List-Editing](./terminology/list_editing.md)
   - [EditTarget](./terminology/edittarget.md)
   - [Instancing](./terminology/instancing.md)
