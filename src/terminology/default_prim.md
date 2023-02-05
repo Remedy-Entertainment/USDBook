@@ -1,8 +1,8 @@
 # Default Prim
 
-When authoring a layer, it is possible to also define a "default prim" for it. This is a layer metadatum that contains the name of the prim that should be used automatically when using this layer in a reference or payload composition arc without an explicit prim path.  
+When authoring a layer, it is possible to also define a "default prim" for it. This is a layer metadatum that contains the name of the prim that should be used automatically when the layer is used in a reference or payload composition arc without an explicit prim path.  
 
-The prim name indicates a root level prim, meaning a direct child of the `PseudoRoot`. Therefore, it is not allowed to point to a path.
+This name must point to a root level prim, meaning a direct child of the `PseudoRoot`. Therefore, it is not allowed to point to a path.
 
 ```admonish example title ="example defaultPrim in layer metadata"
 ~~~
@@ -10,6 +10,21 @@ The prim name indicates a root level prim, meaning a direct child of the `Pseudo
 (
     defaultPrim = "PrimName"  
 )
+
+def "PrimName" {}
+~~~
+```
+
+```admonish error title ="Invalid defaultPrim"
+~~~
+#usda 1.0
+(
+    defaultPrim = "PrimName/NestedPrim"  
+)
+
+def "PrimName" {
+    def "NestedPrim" {}
+}
 ~~~
 ```
 
@@ -20,7 +35,7 @@ Warning: ... In </reference>: Unresolved reference prim path @.../defaultPrim.us
 ```
 
 ```admonish tip title=""
-**It is recommended to always specify `defaultPrim` inside layers.**
+**It is recommended to always specify `defaultPrim` on layers that will be used as references or payloads**
 ```
 
 ## Example
