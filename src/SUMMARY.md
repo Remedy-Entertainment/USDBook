@@ -22,6 +22,7 @@
   - [Overrides](./terminology/overrides.md)
   - [Stage Traversal](./terminology/stage_traversal.md)
   - [Kind](./terminology/kind.md)
+  - [Purpose](./terminology/purpose.md)
   - [Speficier](./terminology/specifier.md)
   - [Composition Arcs](./terminology/composition_arcs.md)
     - [Local/Sublayer](./terminology/local_sublayer.md)
