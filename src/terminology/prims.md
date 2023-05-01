@@ -1,7 +1,7 @@
 # Prims
 
 Short for _Primitive_, and a quintessential component of USD.  
-Prims are the nodes within a in a hierarchy and can thus have parent/child relationships with other prims; meaning that prims can have other prims as children or siblings, or have another prim as a parent.
+Prims are the nodes within a hierarchy and can thus have parent/child relationships with other prims; meaning that prims can have other prims as children or siblings, or have another prim as a parent.
 
 In the image below, every node in the hierarchy is a prim.  
 ```admonish example title="Prim Example"
