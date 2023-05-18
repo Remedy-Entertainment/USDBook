@@ -11,11 +11,16 @@ Below is a simple example of overriding a previously defined attribute's opinion
 ```admonish example title="override example"
 [![schematic](../images/terminology/overrides.png)](../images/terminology/overrides.png)
 
-1. The layer where an attribute's opinion is first authored (`/GEO/Cube.size`)
-2. a. The layer `cube_sphere_torus.usda` is brought into the layer `referenced.usda` via a composition mechanism called `referencing`  
-  b. An opinion is expressed on the already defined attribute `/GEO/Cube.size`, but in context of `cube_sphere_torus.usda`, essentially overriding what was there before
-3. The composed final result, aka the stage
+1. Shows `cube_sphere_torus.usda` where an attribute's [opinion] is first authored (`/GEO/Cube.size`)
+2. Shows `referenced.usda` where
+   * The layer `cube_sphere_torus.usda` is brought into the layer `referenced.usda` via a [composition] mechanism called `referencing`
+   * An opinion is expressed on the already defined attribute `/GEO/Cube.size`, but in context of `cube_sphere_torus.usda`, essentially overriding what was there before
+3. Shows the composed final result, aka the [stage]
 ```
+
+[composition]: composition.md
+[opinion]: opinions.md
+[stage]: stage.md
 
 ---
 
