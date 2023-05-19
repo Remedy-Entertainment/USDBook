@@ -1,0 +1,37 @@
+{
+  "name": "usdbook-frontend",
+  "version": "1.0.0",
+  "description": "USDz viewer frontend for the Book of USD",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Remedy-Entertainment/USDBook.git"
+  },
+  "main": "src/index.js",
+  "scripts": {
+    "build": "webpack",
+    "build:dev": "npm run build -- --mode development",
+    "build:dev:watch": "npm run build:dev -- --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "usd",
+    "usdz",
+    "threejs",
+    "viewer"
+  ],
+  "author": "Philippe Sawicki",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/three": "^0.148.0",
+    "copy-webpack-plugin": "6.4.1",
+    "ts-loader": "^9.4.2",
+    "typescript": "^4.9.4",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
+  },
+  "dependencies": {
+    "coi-serviceworker": "^0.1.6",
+    "three": "^0.148.0",
+    "three-usdz-loader": "^1.0.7"
+  }
+}

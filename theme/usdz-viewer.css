@@ -1,0 +1,41 @@
+/**
+ * Styles for the USDz `<canvas>` container.
+ */
+.js-usd-viewer {
+    box-shadow: 0 0.2rem 1rem rgb(0 0 0 / 5%), 0 0 0.1rem rgb(0 0 0 / 10%);
+}
+
+/**
+ * Style to be queried by JavaScript when User indicated a preference for a "dark" mode.
+ *
+ * Note: This requires a `background-color` attribute.
+ */
+.js-usd-viewer.dark {
+    background-color: #292c3c;
+}
+
+/**
+ * Style to be queried by JavaScript when User indicated a preference for a "light" mode.
+ *
+ * Note: This requires a `background-color` attribute.
+ */
+.js-usd-viewer.light {
+    background-color: #e6e9ef;
+}
+
+/**
+ * Style definitions for the elements displayed while loading the USDz asset.
+ */
+.js-usd-viewer .loader {
+    position: relative;
+}
+.js-usd-viewer .loader .vertical-center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%);
+}
+.js-usd-viewer .loader .vertical-center i {
+    font-size: 5.0rem;
+}

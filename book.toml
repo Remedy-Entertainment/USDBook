@@ -12,7 +12,8 @@ curly-quotes = true
 git-repository-url = "https://github.com/Remedy-Entertainment/USDBook"
 edit-url-template = "https://github.com/Remedy-Entertainment/USDBook/edit/develop/{path}"
 git-repository-icon = "fa-github"
-additional-css = ["theme/custom.css", 'theme/mdbook-admonish.css', 'theme/catppuccin.css', 'theme/catppuccin-highlight.css']
+additional-css = ["theme/custom.css", 'theme/mdbook-admonish.css', 'theme/catppuccin.css', 'theme/catppuccin-highlight.css', "theme/usdz-viewer.css"]
+additional-js = ["coi-serviceworker.min.js", "theme/js/usdz-viewer.js"]
 no-section-label = true
 
 [output.html.fold]
