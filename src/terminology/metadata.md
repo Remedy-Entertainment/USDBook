@@ -1,6 +1,6 @@
 # Metadata
 
-Prims, their properties, the layers they are part of and even the scene itself can have metadata applied to them. This is additional _static_ (as in, it can not change over time) data that USD or a user can read, use or define.
+Prims, their properties and the layers they are part of can have metadata applied to them. This is additional _static_ (as in, it can not change over time) data that USD or a user can read, use or define.
 
 Metadata can be used to describe behavior, incur meaning, represent documentation, etc. USD comes bundled with an extensive suite of metadata out of the box.
 
@@ -11,35 +11,43 @@ Developers can define new metadata via USD Plugins!
 ## Simple Metadata Examples
 
 ### Layer Metadata
-As mentioned above, layers can contain metadata.
 
 ```admonish example title=""
 ![StageMetadata](../images/terminology/metadata_stage.png)
 ```
 
-In the image above, the [PseudoRoot](https://graphics.pixar.com/usd/release/glossary.html#usdglossary-pseudoroot) at path `/` has been selected in `usdview`, this represents the composed state of the scene and has metadata inferring the following information to the user:
-- The scene is in `centimeters` → `metersPerUnit = 0.01`
-- The world up axis is `Y`
-- Two layers contribute to the scene (more on that in a later chapter)
+In the image above, the [PseudoRoot](https://graphics.pixar.com/usd/release/glossary.html#usdglossary-pseudoroot) at path `/` has been selected and the metadata panel in `usdview` has been highlighted. This root represents the `entry.usda` layer from [Animal Logic ALab](https://animallogic.com/alab/). `entry.usda` defines metadata that can be inspected and presents the following information to the user about itself:
+- The linear units used are `centimeters` → `metersPerUnit = 0.01`
+- The scene's up axis is `Y`
+- Two layers contribute to the scene (see [Local/Sublayer](./local_sublayer.md) later)
 - Animation is present at a certain rate per second → `startTimeCode = 1004.0`, `endTimeCode = 1057.0`, `framesPerSecond = 24.0`, `timeCodesPerSecond = 24.0`
 
 ```admonish warning title=""
-Do note that while a lot of metadata is _informative_, a large part of the core metadata suite also contributes to how USD works internally.
+Do note that while a lot of metadata is just informational data, a large part of the core metadata suite also has side effects that contribute to how USD works internally.
 
-For example, `metersPerUnit` is purely informative, whereas `subLayers` has profound effects when changed!
+For example, `metersPerUnit` is purely informative, whereas `subLayers` has profound effects when edited!
 ```
 
+
 ```admonish note title=""
-Other parts of USD like `UsdPhysics` define other layer metadata such as mass scaling in the form of `kilogramsPerUnit`
+Other USD hosts like Autodesk Maya or Sidefx Houdini may choose to interpret and act on metadata where USD itself does not
 ```
 
 ### Prim Metadata
 
-TODO: TEXT AND IMAGE UPDATE
-
 ```admonish example title=""
 ![StageMetadata](../images/terminology/metadata.png)
 ```
+
+Metadata on Prims can infer a lot of information about the prim itself, how it is used in the scene (aka [Composition](./composition.md)), what kind of properties it has, etc.
+
+From the above we know that the prim at `/root/alab_set01/lab_electronics01_0001/bench01/decor_paper_notej01_0001` 
+
+- Is an `Xform` → `typeName = Xform`
+- It is instanced (see [Instancing](./instancing.md) later) → `instanceable = true`
+- Has two VariantSets (see [VariantSet](./variantset.md) later) → `geo` and `geo_vis`
+- Is categorized as a `component` → `kind = component`
+- Etc.
 
 ```admonish abstract title=""
 See the [Kind](./kind.md) chapter for an elaborate example on the `kind` metadatum can be used.
@@ -47,7 +55,11 @@ See the [Kind](./kind.md) chapter for an elaborate example on the `kind` metadat
 
 ### Property Metadata
 
-TODO: TEXT
+Lastly, there is property metadata. This data is meant to give fine grained information about the property itself. For example
+
+- What type it is → `typename = double3`
+- Whether it can change over time → `variability = Sdf.VariabilityVarying`
+- Is it a custom "out-of-schema" (see [Schemas](./schemas.md) later) property → `custom = false`
 
 ```admonish example title=""
 ![StageMetadata](../images/terminology/metadata_prop.png)
