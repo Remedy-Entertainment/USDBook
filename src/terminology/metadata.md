@@ -53,10 +53,6 @@ From the above we know that the prim at `/root/alab_set01/lab_electronics01_0001
 - Is categorized as a `component` (more about the [Kind](./kind.md) metadatum later) → `kind = component`
 - Etc.
 
-```admonish abstract title=""
-See the [Kind](./kind.md) chapter for an elaborate example on the `kind` metadatum can be used.
-```
-
 ### Property Metadata
 
 Lastly, there is property metadata. This data is meant to give fine grained information about the property itself. For example
