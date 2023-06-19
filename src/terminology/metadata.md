@@ -49,7 +49,7 @@ From the above we know that the prim at `/root/alab_set01/lab_electronics01_0001
 
 - Is an `Xform` → `typeName = Xform`
 - It is instanced (more about [Instancing](./instancing.md) later) → `instanceable = true`
-- Has two VariantSets (see [VariantSet](./variantset.md) later) → `geo` and `geo_vis`
+- Has two VariantSets (more about [VariantSets](./variantset.md) later) → `geo` and `geo_vis`
 - Is categorized as a `component` (more about the [Kind](./kind.md) metadatum later) → `kind = component`
 - Etc.
 
