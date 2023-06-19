@@ -20,7 +20,11 @@ In the image above, the [PseudoRoot](https://graphics.pixar.com/usd/release/glos
 - The linear units used are `centimeters` → `metersPerUnit = 0.01`
 - The scene's up axis is `Y` → `upAxis = Y`
 - Two layers contribute to the scene (see [Local/Sublayer](./local_sublayer.md) later)
-- Animation is present at a certain rate per second → `startTimeCode = 1004.0`, `endTimeCode = 1057.0`, `framesPerSecond = 24.0`, `timeCodesPerSecond = 24.0`
+- Animation is present between time code `1004.0` and `1057.0` with `24.0` frames and time codes per second.
+  - `startTimeCode = 1004.0`
+  - `endTimeCode = 1057.0`
+  - `framesPerSecond = 24.0`
+  - `timeCodesPerSecond = 24.0`
 
 ```admonish warning title=""
 Do note that while a lot of metadata is just informational data, a large part of the core metadata suite also has side effects that contribute to how USD works internally.
