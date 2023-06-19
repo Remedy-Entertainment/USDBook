@@ -17,7 +17,7 @@ Developers can define new metadata via USD Plugins!
 ```
 
 In the image above, the [PseudoRoot](https://graphics.pixar.com/usd/release/glossary.html#usdglossary-pseudoroot) at path `/` has been selected and the metadata panel in `usdview` has been highlighted. This root represents the `entry.usda` layer from [Animal Logic ALab](https://animallogic.com/alab/). `entry.usda` defines metadata that can be inspected and presents the following information to the user about itself:
-- The linear units used are `centimeters` → `metersPerUnit = 0.01`
+- The linear units used are `0.01` meters (i.e. centimeters) → `metersPerUnit = 0.01`
 - The scene's up axis is `Y` → `upAxis = Y`
 - Two layers contribute to the scene (see [Local/Sublayer](./local_sublayer.md) later)
 - Animation is present between time code `1004.0` and `1057.0` with `24.0` frames and time codes per second.
