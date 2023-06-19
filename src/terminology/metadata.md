@@ -55,15 +55,15 @@ From the above we know that the prim at `/root/alab_set01/lab_electronics01_0001
 
 ### Property Metadata
 
+```admonish example title=""
+![StageMetadata](../images/terminology/metadata_prop.png)
+```
+
 Lastly, there is property metadata. This data is meant to give fine grained information about the property itself. For example
 
 - What type it is → `typename = double3`
 - Whether it can change over time → `variability = Sdf.VariabilityVarying`
 - Is it a custom "out-of-schema" (see [Schemas](./schemas.md) later) property → `custom = false`
-
-```admonish example title=""
-![StageMetadata](../images/terminology/metadata_prop.png)
-```
 
 ---
 
