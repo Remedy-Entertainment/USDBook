@@ -1,6 +1,6 @@
 # Path
 
-Prims and properties are defined through unique `paths` inside the scene hierarchy. They are a textual representation of a hierarchy - similar to folder paths in most operating systems - where each prim is separated from its parent or child via the `/` delimiter.
+Prims and properties are identified by unique `paths` inside the scene hierarchy. They are a textual representation of a hierarchy - similar to folder paths in most operating systems - where each prim is separated from its parent or child via the `/` delimiter.
 
 Just like folders, paths can be relative or absolute. Absolute paths always start with `/`
 
