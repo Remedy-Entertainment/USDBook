@@ -1,6 +1,6 @@
 # Path
 
-Prims and properties are defined through unique `paths` inside the scene hierarchy. They are a textual representation of a hierarchy - similar to folder paths in most operating systems - where each prim is separated from its parent or child via the `/` delimiter.
+Prims and properties are identified by unique `paths` inside the scene hierarchy. They are a textual representation of a hierarchy - similar to folder paths in most operating systems - where each prim is separated from its parent or child via the `/` delimiter.
 
 Just like folders, paths can be relative or absolute. Absolute paths always start with `/`
 
@@ -14,7 +14,7 @@ In the example below, the highlighted path `/root/remi/head_M_hrc/GEO/head_M_hrc
 ![](../images/terminology/prim_path.png)
 ```
 
-Properties are also defined by paths. Taking the previous example, inspecting the `points` attribute yields the path `/root/remi/head_M_hrc/GEO/head_M_hrc/eyeScrew_L_geo.points`. Property paths are constructed by appending the property name to a prim path, delimited by a `.` character.
+As for properties, taking the previous example, inspecting the `points` attribute yields the path `/root/remi/head_M_hrc/GEO/head_M_hrc/eyeScrew_L_geo.points`. Property paths are constructed by appending the property name to a prim path, delimited by a `.` character.
 
 ```admonish example title="Property Path Example"
 ![](../images/terminology/property_path.png)
