@@ -10,7 +10,7 @@ In short, USD is a way to describe 3D-Scene Hierarchies.
 Generally speaking, hierarchies consist of entries (aka. `nodes`) that have parent/child/sibling relationships with other nodes.  
 In USD, these nodes can have "physicality" (think of Geometry, Animation data, etc...) or be more abstract like grouping items, materials, shaders, and even "settings" can be expressed as a node within a hierarchy.  
 
-Where USD differs greatly from other scene descriptions, is in its ability to combine hierarchies together with varying types of behavior (this is known as [composition](./basic/composition.md)). Within USD you can non-destructively refer to- or graft other hierarchies together, re-define previously defined data, collaborate with many others on the same hierarchy, and much more.
+Where USD differs greatly from other scene descriptions, is in its ability to combine hierarchies together with varying types of behavior (this is known as [composition](./terminology/composition.md)). Within USD you can non-destructively refer to- or graft other hierarchies together, re-define previously defined data, collaborate with many others on the same hierarchy, and much more.
 
 ```admonish example title="Example USD Scene Composition"
 ![](./images/alab_root_layer_stack.png)  
